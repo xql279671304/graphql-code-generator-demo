@@ -1,0 +1,56 @@
+type Author {
+  id: Int
+  firstName: String
+  lastName: String
+  posts: [Post]
+}
+
+type Post {
+  title: String
+  author: String
+}
+
+schema {
+  query: query
+  mutation: mutation
+}
+
+type AuthorList {
+  count: Int
+  list: [Author]
+}
+
+input postInPut {
+  title: String
+  author: String
+}
+
+input authorInPut {
+  firstName: String
+  lastName: String
+  posts: [postInPut]
+}
+
+type mutation {
+  createAuthor(
+    id: Int
+    author: authorInPut
+  ): Boolean
+
+  updateAuthor(
+    id: Int
+    author: authorInPut
+  ): Boolean
+}
+
+type query {
+
+  author(
+    id: Int!
+  ): Author
+
+  listAuthor(
+    perPage: Int!
+    page: Int!
+  ): AuthorList
+}

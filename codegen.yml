@@ -1,0 +1,17 @@
+overwrite: true
+schema: ./demo.gql
+generates:
+  ./src/__generated__/types.ts:
+    plugins:
+      - typescript
+  src/:
+    documents: './src/pages/**/gqls.ts'
+    schema: ./demo.gql
+    preset: near-operation-file
+    presetConfig:
+      baseTypesPath: __generated__/types.ts
+      extension: .generated.tsx
+      folder: __generated__
+    plugins:
+      - typescript-operations
+      - typescript-react-apollo
